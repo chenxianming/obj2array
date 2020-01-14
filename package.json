@@ -1,0 +1,17 @@
+{
+  "name": "obj2array",
+  "version": "1.0.0",
+  "description": "convert json object to array, map each value and index position",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "json",
+    "object",
+    "map",
+    "array"
+  ],
+  "author": "cxm",
+  "license": "ISC"
+}
