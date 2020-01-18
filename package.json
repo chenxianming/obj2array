@@ -1,6 +1,6 @@
 {
   "name": "obj2array",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "convert json object to array, map each value and index position",
   "main": "index.js",
   "scripts": {
@@ -13,5 +13,13 @@
     "array"
   ],
   "author": "cxm",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chenxianming/obj2array.git"
+  },
+  "bugs": {
+    "url": "https://github.com/chenxianming/obj2array/issues"
+  },
+  "homepage": "https://github.com/chenxianming/obj2array#readme"
 }

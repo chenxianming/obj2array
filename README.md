@@ -25,6 +25,7 @@ npm i obj2array -s
 
 ``` 
 const obj2array = require('obj2array');
+const jsonParser = obj2array.jsonParser;
 
 let json = {
     "testNum": 5,
@@ -58,22 +59,28 @@ map
 
 ``` 
 // map each children value and index position
-obj2array(json, function (val, idx) {
+jsonParser(json, function (val, idx) {
     console.log( 'index', idx ); // ["testObj"]["obj"]["c"]["aa"][3]
     console.log( 'value', val ); // value 4
     // ...
 });
+
+obj2array.reset(); // this function is not a constructor function, so you need reset defined when program completed this called.
 
 ``` 
 
 set each value
 ``` 
 // set value to each children key
-obj2array(json, function (val, idx) {
+jsonParser(json, function (val, idx) {
     eval( "json"+idx + " = '"+ idx +"'" );
 });
 
 console.log( JSON.stringify( json ) );
+
+
+obj2array.reset(); // this function is not a constructor function, so you need reset defined when program completed this called.
+
 ``` 
 
 

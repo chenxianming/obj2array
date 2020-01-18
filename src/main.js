@@ -35,12 +35,18 @@
     });
     
     
+    reset(); // this function is not a constructor function, so you need reset defined when program completed this called.
+
+    
     // set value to each children key
     jsonParser(json, function (val, idx) {
         eval( "json"+idx + " = '"+ idx +"'" );
     });
     
+    // reset index and 
+    
     console.log( JSON.stringify( json ) );
+    reset(); // this function is not a constructor function, so you need reset defined when program completed this called.
     
 */
 
@@ -48,14 +54,14 @@ function objectType(object) {
     return (typeof object == 'object') ? (Array.isArray(object) ? 'array' : 'object') : 'other';
 }
 
-function length(object) {
-    var arr = Object.keys(object),
+function length(object){
+    var arr = Object.keys( object ),
         idx = 0;
-
-    for (var i = 0; i < arr.length; i++) {
-        (objectType(object[arr[i]]) != 'other') && idx++;
+    
+    for( var i = 0; i < arr.length; i++ ){
+        ( objectType( object[ arr[ i ] ] ) != 'other' ) && idx++;
     }
-
+    
     return idx;
 }
 
@@ -63,37 +69,44 @@ var index = '',
     lLast = '',
     last = '';
 
+function reset(){
+    index = '',
+    lLast = '',
+    last = '';
+}
+
 function jsonParser(parent, fn) {
+    
     var type = objectType(parent);
 
     switch (type) {
         case 'object':
             {
                 last = index;
-
-                (length(parent) > 1) && (lLast = index);
-
+                
+                ( length( parent ) > 1 ) && ( lLast = index );
+                
                 for (var k in parent) {
-                    index = (length(parent) > 1) ? (lLast + '["' + k + '"]') : (last + '["' + k + '"]');
+                    index = ( length( parent ) > 1 ) ? ( lLast + '["' + k + '"]' ) : ( last + '["' + k + '"]' );
                     jsonParser(parent[k], fn);
                 }
             }
             break;
-
+            
         case 'array':
             {
-
+                
                 last = index;
-
-                (length(parent) > 1) && (lLast = index);
-
+                
+                ( length( parent ) > 1 ) && ( lLast = index );
+                
                 for (var i = 0; i < parent.length; i++) {
-                    index = (length(parent) > 1) ? (lLast + '[' + i + ']') : last + '[' + i + ']';
+                    index = ( length( parent ) > 1 ) ? ( lLast + '[' + i + ']' ) : last + '[' + i + ']';
                     jsonParser(parent[i], fn);
                 }
             }
             break;
-
+            
         default:
             {
                 fn(parent, index);
@@ -102,4 +115,5 @@ function jsonParser(parent, fn) {
     }
 }
 
-module.exports = jsonParser;
+exports.jsonParser = jsonParser;
+exports.reset = reset;
